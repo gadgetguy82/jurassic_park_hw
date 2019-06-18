@@ -25,20 +25,36 @@ Park.prototype.mostPopularDino = function () {
 }
 
 Park.prototype.findBySpecies = function (species) {
-  let species_list = [];
+  let speciesList = [];
   for (let dino of this.collectionOfDinosaurs) {
     if (dino.species === species) {
-      species_list.push(dino);
+      speciesList.push(dino);
     }
   }
-  return species_list;
+  return speciesList;
 }
 
 Park.prototype.removeBySpecies = function (species) {
-  let remove_list = this.findBySpecies(species);
-  for (let dino of remove_list) {
+  let removeList = this.findBySpecies(species);
+  for (let dino of removeList) {
     this.removeDinosaur(dino);
   }
+}
+
+Park.prototype.calculateTotalVisitorsPerDay = function () {
+  let totalVisitors = 0;
+  for (let dino of this.collectionOfDinosaurs) {
+    totalVisitors += dino.guestsAttractedPerDay;
+  }
+  return totalVisitors;
+}
+
+Park.prototype.calculateTotalVisitorsPerYear = function () {
+  return this.calculateTotalVisitorsPerDay() * 365;
+}
+
+Park.prototype.calculateTotalRevenuePerYear = function () {
+  return this.calculateTotalVisitorsPerYear() * this.ticketPrice;
 }
 
 module.exports = Park;
