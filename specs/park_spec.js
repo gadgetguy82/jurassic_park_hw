@@ -14,6 +14,7 @@ describe('Park', function() {
     spike = new Dinosaur('Triceratops', 'herbivore', 30);
     stegz = new Dinosaur('Stegosaurus', 'herbivore', 25);
     hard_rock = new Dinosaur('Ankylosaurus', 'herbivore', 28);
+    yoshi = new Dinosaur('Ornithomimus', 'omnivore', 45);
   })
 
   it('should have a name', function () {
@@ -106,6 +107,22 @@ describe('Park', function() {
     park.addDinosaur(hard_rock);
     const actual = park.calculateTotalRevenuePerYear();
     assert.strictEqual(actual, 2715600);
+  });
+
+  it("should be able to return an object with diet types along with number of dinos of that type", function () {
+    park.addDinosaur(t_bone);
+    park.addDinosaur(spike);
+    park.addDinosaur(grimlock);
+    park.addDinosaur(stegz);
+    park.addDinosaur(rex);
+    park.addDinosaur(hard_rock);
+    park.addDinosaur(yoshi);
+    const actual = park.countOfDietTypes();
+    assert.deepStrictEqual(actual, {
+      "herbivore": 3,
+      "carnivore": 3,
+      "omnivore": 1
+    });
   });
 
 });
